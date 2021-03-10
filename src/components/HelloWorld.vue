@@ -114,7 +114,20 @@
 export default {
   name: "HelloWorld",
   props: {
-    msg: String
+    msg: {
+      type: String,
+      default: ""
+    }
+  },
+  data() {
+    return {
+      a: {
+        hell: 1123
+      }
+    };
+  },
+  mounted() {
+    console.log("hh");
   }
 };
 </script>
