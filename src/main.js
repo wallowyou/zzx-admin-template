@@ -8,6 +8,13 @@ import "./plugins/element.js";
 import "@/icons"; // icon
 Vue.config.productionTip = false;
 
+/* 
+  如果接口已经好了那么此处删除
+ */
+if (process.env.NODE_ENV === "production") {
+  const { mockXHR } = require("../mock");
+  mockXHR();
+}
 new Vue({
   router,
   store,

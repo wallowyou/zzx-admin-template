@@ -6,9 +6,10 @@ import Vue from "vue";
 import lang from "element-ui/lib/locale/lang/zh-CN";
 import locale from "element-ui/lib/locale";
 /* 
-替换成自定义主题 可以全局引入全部的主题样式，也可以在babel.config.js中配置主题文件
+    替换成自定义主题 可以全局引入全部的主题样式，也可以在babel.config.js中配置主题文件,
+    暂时全局引入央样式
  */
-
+import "@/styles/theme/index.css";
 // 设置语言
 locale.use(lang);
 

@@ -1,18 +1,25 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    这是home页面
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import { getLists } from "@/api/table";
 
 export default {
   name: "Home",
-  components: {
-    HelloWorld
+  components: {},
+  created() {
+    this.getDatas();
+  },
+  methods: {
+    getDatas() {
+      getLists().then(res => {
+        console.log(res);
+      });
+    }
   }
 };
 </script>

@@ -7,7 +7,8 @@
     <el-button type="primary" size="me">按钮</el-button>
     <el-switch v-model="value" active-color="#13ce66" inactive-color="#ff4949">
     </el-switch>
-    <svg-icon icon-class="ai" />
+    <svg-icon class-name="ai-icon" icon-class="ai" />
+    <div style="height:700px;">a</div>
   </div>
 </template>
 <script>
@@ -28,5 +29,8 @@ export default {
 <style lang="scss">
 .list-item {
   color: $menuText;
+}
+.ai-icon {
+  color: red;
 }
 </style>

@@ -30,9 +30,11 @@
               name="password"
               tabindex="2"
               auto-complete="on"
-              prefix-icon="el-icon-user"
+              prefix-icon="el-icon-key"
               @keyup.enter.native="handleLogin"
-            />
+            >
+              <i class="el-icon-view" slot="suffix" @click="showPwd"></i>
+            </el-input>
           </el-form-item>
         </div>
         <div class="login-row login-checkout">
@@ -61,7 +63,17 @@ export default {
     };
   },
   methods: {
-    handleLogin() {}
+    handleLogin() {},
+    showPwd() {
+      if (this.passwordType === "password") {
+        this.passwordType = "";
+      } else {
+        this.passwordType = "password";
+      }
+      this.$nextTick(() => {
+        this.$refs.password.focus();
+      });
+    }
   }
 };
 </script>

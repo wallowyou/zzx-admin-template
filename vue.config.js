@@ -4,6 +4,21 @@ function resolve(dir) {
   return path.join(__dirname, dir);
 }
 module.exports = {
+  publicPath: "/",
+  outputDir: "dist",
+  assetsDir: "static",
+  lintOnSave: process.env.NODE_ENV === "development",
+  productionSourceMap: false,
+  devServer: {
+    port: 8080,
+    open: true,
+    overlay: {
+      warnings: false,
+      errors: true
+    },
+    // proxy: {},
+    before: require("./mock/mock-server.js") // 开发环境下启动本地mocker数据
+  },
   css: {
     loaderOptions: {
       /* 
@@ -18,6 +33,7 @@ module.exports = {
       }
     }
   },
+
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.

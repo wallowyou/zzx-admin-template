@@ -3,10 +3,10 @@
 */
 
 import axios from "axios";
-import { Notification, MessageBox } from "element-ui";
-import store from "@/store";
-import router from "@/router";
-import { getToken, removeToken, removeExpires } from "@/utils/auth";
+// import { Notification, MessageBox } from "element-ui";
+// import store from "@/store";
+// import router from "@/router";
+// import { removeToken, removeExpires } from "@/utils/auth";
 
 // 创建一个axios实例
 const service = axios.create({
@@ -24,17 +24,19 @@ const service = axios.create({
 */
 
 /* 定义一个全局变量防止多个请求返回401的时候多次出现弹框*/
+
 service.defaults.authnum = 0;
+
 // 请求拦截器
 service.interceptors.request.use(
   config => {
     // 此处除了登录请求其他一律需要在请求头加上token
-    if (store.getters.token) {
-      // 除了登陆请求，其他请求都需要带上请求头
-      if (config.url !== "/auth/login") {
-        config.headers["Authorization"] = "Bearer " + getToken();
-      }
-    }
+    // if (store.getters.token) {
+    //   // 除了登陆请求，其他请求都需要带上请求头
+    //   if (config.url !== "/auth/login") {
+    //     config.headers["Authorization"] = "Bearer " + getToken();
+    //   }
+    // }
     return config;
   },
   error => {
@@ -53,56 +55,59 @@ service.interceptors.response.use(
     /* 返回拦截器,统一处理请求失败的情况*/
     console.log("err" + error);
     const status = error.response.status;
-    service.defaults.authnum++;
+    console.log(status);
+    // service.defaults.authnum++;
+
     /* 此处根据不同的状态码做不同的操作*/
-    switch (status) {
-      case 401:
-        if (service.defaults.authnum === 1) {
-          MessageBox.confirm(
-            "登录信息token已过期，请点击确认重新登录",
-            "确认信息",
-            {
-              distinguishCancelAndClose: true,
-              confirmButtonText: "跳转到登录页面",
-              cancelButtonText: "取消"
-            }
-          )
-            .then(() => {
-              console.log("点击了确认");
-              removeToken();
-              removeExpires();
-              service.defaults.authnum = 0;
-              router.push({
-                path: "/login"
-              });
-            })
-            .catch(action => {
-              console.log(action);
-              service.defaults.authnum = 0;
-            });
-        }
-        break;
-      case 404:
-        Notification({
-          title: "请求失败: 404",
-          message: error,
-          type: "error"
-        });
-        break;
-      case 500:
-        Notification({
-          title: "请求失败,服务器状态: 500",
-          message: error,
-          type: "error"
-        });
-        break;
-      default:
-        Notification({
-          title: "请求失败",
-          message: error,
-          type: "error"
-        });
-    }
+
+    // switch (status) {
+    //   case 401:
+    //     if (service.defaults.authnum === 1) {
+    //       MessageBox.confirm(
+    //         "登录信息token已过期，请点击确认重新登录",
+    //         "确认信息",
+    //         {
+    //           distinguishCancelAndClose: true,
+    //           confirmButtonText: "跳转到登录页面",
+    //           cancelButtonText: "取消"
+    //         }
+    //       )
+    //         .then(() => {
+    //           console.log("点击了确认");
+    //           removeToken();
+    //           removeExpires();
+    //           service.defaults.authnum = 0;
+    //           router.push({
+    //             path: "/login"
+    //           });
+    //         })
+    //         .catch(action => {
+    //           console.log(action);
+    //           service.defaults.authnum = 0;
+    //         });
+    //     }
+    //     break;
+    //   case 404:
+    //     Notification({
+    //       title: "请求失败: 404",
+    //       message: error,
+    //       type: "error"
+    //     });
+    //     break;
+    //   case 500:
+    //     Notification({
+    //       title: "请求失败,服务器状态: 500",
+    //       message: error,
+    //       type: "error"
+    //     });
+    //     break;
+    //   default:
+    //     Notification({
+    //       title: "请求失败",
+    //       message: error,
+    //       type: "error"
+    //     });
+    // }
     const config = error.config;
     if (!config || !config.retry) return Promise.reject(error);
     config._retryCount = config._retryCount || 0;
@@ -120,5 +125,7 @@ service.interceptors.response.use(
     });
   }
 );
+
 // 导出一个axios实例
+
 export default service;
