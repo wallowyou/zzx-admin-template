@@ -1,5 +1,8 @@
 <template>
-  <div class="layout-default layout-default__fixed">
+  <div
+    class="layout-default layout-default__fixed"
+    :class="isCollapse ? 'layout-default__collapse' : ''"
+  >
     <layout-header />
     <layout-aside />
     <section class="layout-default_content">
@@ -10,6 +13,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 import LayoutHeader from "./AppHeader/index.vue";
 import LayoutAside from "./Sidebar/index.vue";
 export default {
@@ -18,6 +22,10 @@ export default {
     LayoutAside
   },
   computed: {
+    ...mapGetters(["sidebar"]),
+    isCollapse() {
+      return !this.sidebar.opened;
+    },
     key() {
       return this.$route.path;
     }
@@ -51,6 +59,24 @@ export default {
   }
   .layout-default-aside {
     position: fixed;
+  }
+}
+.layout-default__collapse {
+  .layout-default-aside {
+    width: $sidebarCollapseWidth;
+  }
+  .layout-default_content {
+    margin-top: $headerHeight;
+    margin-left: $sidebarCollapseWidth;
+  }
+  .header-logo {
+    width: $sidebarCollapseWidth;
+  }
+  .logo-img {
+    max-width: 40px;
+  }
+  .user-info {
+    display: none;
   }
 }
 </style>

@@ -6,23 +6,51 @@
     <div class="header-nav-wrap">
       <ul class="header-nav-left header-nav">
         <li>
-          <div class="header-nav-item">
+          <div class="header-nav-item" @click="toggleSideBar">
             <svg-icon
-              icon-class="toggle-left"
+              :icon-class="isCollapse ? 'toggle-right' : 'toggle-left'"
               class-name="toggle-icon"
             ></svg-icon>
           </div>
         </li>
       </ul>
-      <div class="header-nav-right"></div>
+      <ul class="header-nav-right header-nav">
+        <li>
+          <alarm class="header-nav-item" />
+        </li>
+        <li>
+          <full-screen class="header-nav-item" />
+        </li>
+        <li>
+          <user-menu class="header-nav-item" />
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 <script>
-import Logo from "./Logo.vue";
+import { mapGetters } from "vuex";
+import Logo from "./components/Logo";
+import FullScreen from "./components/FullScreen";
+import Alarm from "./components/Alarm";
+import UserMenu from "./components/UserMenu";
 export default {
   components: {
-    Logo
+    Logo,
+    FullScreen,
+    Alarm,
+    UserMenu
+  },
+  computed: {
+    ...mapGetters(["sidebar"]),
+    isCollapse() {
+      return !this.sidebar.opened;
+    }
+  },
+  methods: {
+    toggleSideBar() {
+      this.$store.dispatch("app/toggleSideBar");
+    }
   }
 };
 </script>
@@ -35,6 +63,8 @@ export default {
   padding: 0 16px;
   background-color: $primaryColor;
   color: #ffffff;
+  box-sizing: border-box;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
 }
 .header-logo {
   width: $sidebarWidth;
@@ -46,15 +76,15 @@ export default {
   flex: 1;
   justify-content: space-between;
 }
-.header-nav-left {
-}
 .header-nav {
-  padding: 0;
+  display: flex;
+  align-items: center;
   margin: 0;
+  padding: 0;
   list-style-type: none;
   li {
     padding: 0;
-    margin: 0;
+    margin: 0 6px;
     display: inline-block;
     vertical-align: middle;
   }

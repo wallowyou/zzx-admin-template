@@ -7,10 +7,12 @@
 </template>
 <script>
 import LayoutDefault from "./LayoutDefault.vue";
+import ResizeMixin from "./mixin/ResizeHandler";
 export default {
   components: {
     LayoutDefault
-  }
+  },
+  mixins: [ResizeMixin]
 };
 </script>
 <style lang="scss">
@@ -23,6 +25,9 @@ export default {
   .el-scrollbar__wrap {
     overflow: hidden scroll;
     height: 100%;
+  }
+  .el-scrollbar__view {
+    min-height: 100%;
   }
   .el-scrollbar__bar {
     z-index: 30;

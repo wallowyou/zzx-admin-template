@@ -4,7 +4,10 @@ import Layout from "@/layout/LayoutBasic.vue";
 
 Vue.use(VueRouter);
 
-const routes = [
+/* 静态路由
+   不需要任何权限就可以进入的页面
+*/
+const constantRoutes = [
   {
     path: "/",
     component: Layout,
@@ -40,8 +43,17 @@ const routes = [
   }
 ];
 
-const router = new VueRouter({
-  routes
-});
+const createRouter = () =>
+  new VueRouter({
+    mode: "hash", // 路由模式 hash or history
+    scrollBehavior: () => ({ y: 0 }),
+    routes: constantRoutes
+  });
+const router = createRouter();
 
+// resetRouter 重置路由
+export const resetRouter = () => {
+  const newRouter = createRouter();
+  router.matcher = newRouter.matcher;
+};
 export default router;

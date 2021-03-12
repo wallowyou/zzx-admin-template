@@ -15,6 +15,7 @@ locale.use(lang);
 
 // 按需引入组件
 import {
+  Avatar,
   Pagination,
   Dialog,
   Autocomplete,
@@ -96,6 +97,7 @@ import {
   Popconfirm
 } from "element-ui";
 
+Vue.use(Avatar);
 Vue.use(Pagination);
 Vue.use(Dialog);
 Vue.use(Autocomplete);

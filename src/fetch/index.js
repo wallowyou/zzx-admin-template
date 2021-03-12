@@ -1,5 +1,5 @@
 /* 
-    封装axios请求,增加请求失败自动重新请求，以及取消重复未完成的请求
+  封装axios请求,增加请求失败自动重新请求，以及取消重复未完成的请求
 */
 
 import axios from "axios";
@@ -13,8 +13,9 @@ const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   timeout: 5000
 });
-/*  设置请求失败自动重连的参数, 此处设置的是所有请求都会失败自动重连，
-    考虑到不是所有的请求都需要，可能只是特定请求有此需求，所以配置的retry个retryDelay可以放到每个请求的config
+/*  
+  设置请求失败自动重连的参数, 此处设置的是所有请求都会失败自动重连，
+  考虑到不是所有的请求都需要，可能只是特定请求有此需求，所以配置的retry个retryDelay可以放到每个请求的config
 */
 // service.defaults.retry = 3
 // service.defaults.retryDelay = 2000
