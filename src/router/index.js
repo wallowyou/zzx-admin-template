@@ -16,26 +16,56 @@ const constantRoutes = [
       {
         path: "home",
         name: "Home",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () =>
-          import(/* webpackChunkName: "home" */ "@/views/Home.vue")
+          import(/* webpackChunkName: "home" */ "@/views/Home.vue"),
+        meta: { title: "首页", icon: "home" }
+      }
+    ]
+  },
+  {
+    path: "/about",
+    component: Layout,
+    redirect: "/about/index",
+    children: [
+      {
+        path: "index",
+        name: "AboutIndex",
+        // which is lazy-loaded when the route is visited.
+        component: () =>
+          import(/* webpackChunkName: "about" */ "@/views/About.vue"),
+        meta: { title: "关于", icon: "about" }
+      }
+    ]
+  },
+  {
+    path: "/test",
+    component: Layout,
+    redirect: "/test/index",
+    meta: { title: "测试", icon: "test" },
+    children: [
+      {
+        path: "index",
+        name: "TestIndex",
+        // which is lazy-loaded when the route is visited.
+        component: () =>
+          import(/* webpackChunkName: "test" */ "@/views/test/index.vue"),
+        meta: { title: "测试主页" }
       },
       {
-        path: "about",
-        name: "About",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
+        path: "table",
+        name: "Table",
         // which is lazy-loaded when the route is visited.
         component: () =>
-          import(/* webpackChunkName: "about" */ "@/views/About.vue")
+          import(/* webpackChunkName: "table" */ "@/views/test/table.vue"),
+        meta: { title: "表格" }
       }
     ]
   },
   {
     path: "/login",
     name: "Login",
+    hidden: true,
     component: () =>
       import(
         /* webpackChunkName: "about" */ "../views/passport/login/login.vue"

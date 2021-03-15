@@ -11,16 +11,55 @@
         </div>
       </div>
       <div class="aside-navbar">
-        <sidebar-item />
+        <el-menu
+          :default-active="activeMenu"
+          :collapse="isCollapse"
+          :background-color="variables.menuBg"
+          :text-color="variables.menuText"
+          :unique-opened="true"
+          :active-text-color="variables.menuActiveText"
+          :collapse-transition="false"
+          mode="vertical"
+        >
+          <sidebar-item
+            v-for="route in routes"
+            :key="route.path"
+            :item="route"
+            :base-path="route.path"
+          />
+        </el-menu>
       </div>
     </div>
   </div>
 </template>
 <script>
 import SidebarItem from "./SidebarItem.vue";
+import { mapGetters } from "vuex";
+import variables from "@/styles/variables.scss";
 export default {
   components: {
     SidebarItem
+  },
+  computed: {
+    ...mapGetters(["sidebar"]),
+    routes() {
+      return this.$router.options.routes.filter(route => !route.hidden);
+    },
+    activeMenu() {
+      const route = this.$route;
+      const { meta, path } = route;
+      // if set path, the sidebar will highlight the path you set
+      if (meta.activeMenu) {
+        return meta.activeMenu;
+      }
+      return path;
+    },
+    variables() {
+      return variables;
+    },
+    isCollapse() {
+      return !this.sidebar.opened;
+    }
   }
 };
 </script>
@@ -65,6 +104,51 @@ export default {
 }
 .user-info__name {
   margin-bottom: 5px;
+}
+.aside-navbar {
+  a {
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    text-decoration: none;
+  }
+  .svg-icon {
+    padding-right: 12px;
+  }
+  // 菜单栏折叠样式隐藏标题和箭头
+  .el-menu--collapse {
+    .el-submenu {
+      & > .el-submenu__title {
+        & > span {
+          height: 0;
+          width: 0;
+          overflow: hidden;
+          visibility: hidden;
+          display: inline-block;
+        }
+        & > i {
+          visibility: hidden;
+        }
+      }
+    }
+    .svg-icon {
+      padding-right: 0;
+    }
+  }
+  .el-menu-item.is-active.submenu-title-noDropdown {
+    border-left: 2px solid $primaryColor;
+  }
+  .el-submenu.is-active {
+    border-left: 2px solid $primaryColor;
+  }
+}
+.el-menu--vertical {
+  a {
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    text-decoration: none;
+  }
 }
 </style>
 <style lang="scss" scoped>

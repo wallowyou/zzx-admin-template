@@ -10,7 +10,8 @@
     "test:unit": "vue-cli-service test:unit",
     "report": "vue-cli-service build --report",
     "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "ui": "vue ui"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -36,6 +37,7 @@
     "babel-plugin-component": "^1.1.1",
     "chalk": "^4.1.0",
     "chokidar": "^3.5.1",
+    "compression-webpack-plugin": "^6.1.1",
     "element-theme-chalk": "^2.15.1",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.3",
