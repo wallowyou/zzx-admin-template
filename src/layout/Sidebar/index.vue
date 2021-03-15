@@ -141,6 +141,11 @@ export default {
   .el-submenu.is-active {
     border-left: 2px solid $primaryColor;
   }
+  .el-submenu.is-active {
+    .el-submenu__title {
+      color: $primaryColor !important;
+    }
+  }
 }
 .el-menu--vertical {
   a {
