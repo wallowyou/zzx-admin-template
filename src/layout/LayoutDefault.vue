@@ -43,7 +43,7 @@ export default {
   display: block;
   width: 100%;
   height: auto;
-  min-height: 100%;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 .layout-default_content {

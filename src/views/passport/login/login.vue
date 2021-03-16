@@ -1,12 +1,17 @@
 <template>
   <div class="login-page">
     <div class="login-container">
-      <el-form ref="loginForm" :model="loginForm" auto-complete="on">
+      <el-form
+        ref="loginForm"
+        :model="loginForm"
+        :rules="loginRules"
+        auto-complete="on"
+      >
         <div class="title-container">
           <h3 class="title">登录</h3>
         </div>
         <div class="login-row">
-          <el-form-item>
+          <el-form-item prop="username">
             <el-input
               ref="username"
               v-model="loginForm.username"
@@ -20,7 +25,7 @@
           </el-form-item>
         </div>
         <div class="login-row">
-          <el-form-item>
+          <el-form-item prop="username">
             <el-input
               :key="passwordType"
               ref="password"
@@ -42,7 +47,11 @@
           <a class="forget-pass">忘记密码</a>
         </div>
         <div class="login-row">
-          <el-button type="primary" class="login-btn" @click="handleLogin"
+          <el-button
+            type="primary"
+            class="login-btn"
+            @click="handleLogin"
+            :loading="loading"
             >登录</el-button
           >
         </div>
@@ -59,11 +68,36 @@ export default {
         password: "admin",
         rememberMe: false
       },
-      passwordType: "password"
+      loginRules: {
+        username: [{ required: true, trigger: "blur" }],
+        password: [{ required: true, trigger: "blur" }]
+      },
+      loading: false,
+      passwordType: "password",
+      redirect: undefined
     };
   },
   methods: {
-    handleLogin() {},
+    handleLogin() {
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          this.loading = true;
+          this.$store
+            .dispatch("user/login", this.loginForm)
+            .then(() => {
+              console.log(this.redirect);
+              this.$router.push({ path: this.redirect || "/" });
+              this.loading = false;
+            })
+            .catch(() => {
+              this.loading = false;
+            });
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
     showPwd() {
       if (this.passwordType === "password") {
         this.passwordType = "";

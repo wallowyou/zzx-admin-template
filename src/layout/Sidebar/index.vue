@@ -75,8 +75,7 @@ export default {
   background-color: #fff;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transition: width 0.2s cubic-bezier(0.25, 0, 0.15, 1) translate 0.2s
-    cubic-bezier(0.25, 0, 0.15, 1);
+  transition: width 0.2s;
 }
 .layout-aside__inner {
   height: 100%;
@@ -115,6 +114,10 @@ export default {
   .svg-icon {
     padding-right: 12px;
   }
+  .el-submenu,
+  .el-menu-item.submenu-title-noDropdown {
+    border-left: 3px solid transparent;
+  }
   // 菜单栏折叠样式隐藏标题和箭头
   .el-menu--collapse {
     .el-submenu {
@@ -136,10 +139,11 @@ export default {
     }
   }
   .el-menu-item.is-active.submenu-title-noDropdown {
-    border-left: 2px solid $primaryColor;
+    border-left: 3px solid $primaryColor;
   }
+
   .el-submenu.is-active {
-    border-left: 2px solid $primaryColor;
+    border-left: 3px solid $primaryColor;
   }
   .el-submenu.is-active {
     .el-submenu__title {

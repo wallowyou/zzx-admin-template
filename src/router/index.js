@@ -50,7 +50,7 @@ const constantRoutes = [
         // which is lazy-loaded when the route is visited.
         component: () =>
           import(/* webpackChunkName: "test" */ "@/views/test/index.vue"),
-        meta: { title: "测试主页" }
+        meta: { title: "组件" }
       },
       {
         path: "table",
