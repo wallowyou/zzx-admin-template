@@ -1,5 +1,5 @@
-import { login } from "@/api/user";
-import { getToken, setToken } from "@/utils/storage";
+import { login, logout } from "@/api/user";
+import { getToken, removeToken, setToken } from "@/utils/storage";
 const getDefaultState = () => {
   return {
     token: getToken()
@@ -12,6 +12,9 @@ const mutations = {
   },
   SET_TOKEN: (state, token) => {
     state.token = token;
+  },
+  REMOVE_TOKEN: state => {
+    state.token = "";
   }
 };
 const actions = {
@@ -25,6 +28,24 @@ const actions = {
             const token = response.data.token;
             commit("SET_TOKEN", token);
             setToken(token);
+          }
+          resolve();
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
+  logout({ commit }) {
+    return new Promise((resolve, reject) => {
+      logout()
+        .then(response => {
+          if (response) {
+            const code = response.code;
+            if (code === 200) {
+              commit("REMOVE_TOKEN");
+              removeToken();
+            }
           }
           resolve();
         })

@@ -77,6 +77,14 @@ export default {
       redirect: undefined
     };
   },
+  watch: {
+    $route: {
+      handler: function(route) {
+        this.redirect = route.query && route.query.redirect;
+      },
+      immediate: true
+    }
+  },
   methods: {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {

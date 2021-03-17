@@ -15,7 +15,7 @@ export function getInfo(token) {
 }
 export function logout() {
   return request({
-    url: "/auth/logout",
+    url: "/vue-admin-template/user/logout",
     method: "post"
   });
 }
