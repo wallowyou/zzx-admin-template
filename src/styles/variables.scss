@@ -1,9 +1,8 @@
 /* 全局scss变量*/
 $primaryColor: #6165D4;
 
-
 // sidebar
-$menuText:rgba(0,0,0,.85);
+$menuText:#ffffff;
 $menuActiveText: #6165D4;
 $subMenuActiveText:#FFFFFF; //https://github.com/ElemeFE/element/issues/12951
 $menuActiveBg:#7B7DE3;
@@ -11,14 +10,17 @@ $menuBg:#373974;
 $menuHover:rgba(46, 94, 224, 1);
 $sidebarWidth: 220px;
 $sidebarCollapseWidth: 64px;
-$sidebarBgColor: #ffffff;
+$sidebarBgColor: #373974;
+$sidebarColor: #ffffff;
 
 // header样式
-
 $headerHeight: 64px;
+$headerBg: #ffffff;
+$headerColor: #000000;
 :export {
     primaryColor: $primaryColor;
     menuText: $menuText;
+    menuBg: $menuBg;
     menuActiveText: $menuActiveText;
     subMenuActiveText: $subMenuActiveText;
     menuActiveBg: $menuActiveBg;

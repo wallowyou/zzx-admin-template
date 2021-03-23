@@ -1,6 +1,9 @@
 <template>
-  <div class="layout-default-aside">
+  <div class="layout-aside">
     <div class="layout-aside__inner">
+      <div class="aside-logo">
+        <logo />
+      </div>
       <div class="aside-avatar">
         <div class="avator-img">
           <img src="@/assets/images/avatar.png" alt="" />
@@ -33,12 +36,14 @@
   </div>
 </template>
 <script>
+import Logo from "./Logo.vue";
 import SidebarItem from "./SidebarItem.vue";
 import { mapGetters } from "vuex";
 import variables from "@/styles/variables.scss";
 export default {
   components: {
-    SidebarItem
+    SidebarItem,
+    Logo
   },
   computed: {
     ...mapGetters(["sidebar"]),
@@ -64,15 +69,17 @@ export default {
 };
 </script>
 <style lang="scss">
-.layout-default-aside {
-  position: absolute;
+.layout-aside {
+  position: fixed;
+  left: 0;
   top: 0;
-  bottom: 0;
-  z-index: 10;
+  z-index: 12;
+  height: 100%;
   width: $sidebarWidth;
-  margin-top: $headerHeight;
+  // margin-top: $headerHeight;
   overflow: hidden;
-  background-color: #fff;
+  background-color: $sidebarBgColor;
+  color: $sidebarColor;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transition: width 0.2s;
@@ -89,6 +96,13 @@ export default {
     width: 0;
     height: 0;
   }
+}
+.aside-logo {
+  height: $headerHeight;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
 }
 .aside-avatar {
   display: flex;
@@ -114,9 +128,8 @@ export default {
   .svg-icon {
     padding-right: 12px;
   }
-  .el-submenu,
-  .el-menu-item.submenu-title-noDropdown {
-    border-left: 3px solid transparent;
+  .el-menu {
+    border-right: none;
   }
   // 菜单栏折叠样式隐藏标题和箭头
   .el-menu--collapse {
@@ -136,18 +149,6 @@ export default {
     }
     .svg-icon {
       padding-right: 0;
-    }
-  }
-  .el-menu-item.is-active.submenu-title-noDropdown {
-    border-left: 3px solid $primaryColor;
-  }
-
-  .el-submenu.is-active {
-    border-left: 3px solid $primaryColor;
-  }
-  .el-submenu.is-active {
-    .el-submenu__title {
-      color: $primaryColor !important;
     }
   }
 }

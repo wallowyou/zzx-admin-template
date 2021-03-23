@@ -6,9 +6,6 @@
   </div>
 </template>
 <style lang="scss">
-.header-logo__inner {
-  height: 100%;
-}
 .logo-link {
   display: block;
   text-align: center;

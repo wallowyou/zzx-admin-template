@@ -1,8 +1,5 @@
 <template>
-  <div class="layout-default-header layout-header__fixed">
-    <div class="header-logo">
-      <Logo />
-    </div>
+  <div class="layout-header">
     <div class="header-nav-wrap">
       <ul class="header-nav-left header-nav">
         <li>
@@ -30,13 +27,11 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import Logo from "./components/Logo";
 import FullScreen from "./components/FullScreen";
 import Alarm from "./components/Alarm";
 import UserMenu from "./components/UserMenu";
 export default {
   components: {
-    Logo,
     FullScreen,
     Alarm,
     UserMenu
@@ -55,26 +50,30 @@ export default {
 };
 </script>
 <style lang="scss">
-.layout-default-header {
+.layout-header {
   height: $headerHeight;
   display: flex;
+  z-index: 10;
   align-items: center;
   width: 100%;
-  padding: 0 16px;
-  background-color: $primaryColor;
-  color: #ffffff;
-  box-sizing: border-box;
-  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+  background: $headerBg;
+  color: $headerColor;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.07);
+  padding-left: $sidebarWidth;
+  transition: padding-left ease-in-out 0.3s;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
-.header-logo {
+.app-placeholder {
   width: $sidebarWidth;
-  margin-left: -16px;
-  transition: width 0.2s cubic-bezier(0.25, 0, 0.15, 1);
+  height: 100%;
 }
 .header-nav-wrap {
   display: flex;
   flex: 1;
   justify-content: space-between;
+  padding: 0 16px;
 }
 .header-nav {
   display: flex;
@@ -84,7 +83,6 @@ export default {
   list-style-type: none;
   li {
     padding: 0;
-    margin: 0 6px;
     display: inline-block;
     vertical-align: middle;
   }
@@ -101,6 +99,10 @@ export default {
   transition: background-color 0.3s;
   &:hover {
     background: #9699e9;
+    color: #ffffff;
+    .el-dropdown {
+      color: #ffffff;
+    }
   }
 }
 </style>

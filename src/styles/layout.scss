@@ -1,0 +1,30 @@
+.layout-basic {
+    height: 100%;
+    overflow-x: hidden;
+  }
+  .layout-content {
+    height: calc(100% - #{$headerHeight});
+    margin-top: $headerHeight;
+    margin-left: $sidebarWidth;
+    transition: margin-left ease-in-out 0.3s;
+  }
+  .layout-basic__collapse {
+    .layout-aside {
+      width: $sidebarCollapseWidth;
+    }
+    .layout-header {
+      padding-left: $sidebarCollapseWidth;
+    }
+    .logo-img {
+      max-width: $sidebarCollapseWidth;
+    }
+    .layout-content {
+      margin-left: $sidebarCollapseWidth;
+    }
+    .user-info {
+      display: none;
+    }
+  }
+  .layout-page {
+    min-height: 100%;
+  }

@@ -37,8 +37,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.user-menu-wrap {
+  padding-right: 16px;
+}
 .user-menu {
-  color: #ffffff;
   font-size: 12px;
 }
 .user-img {
