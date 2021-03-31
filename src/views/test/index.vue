@@ -7,16 +7,26 @@
       <div class="bar-chart">
         <bar-chart :customOpt="barOpts" />
       </div>
+      <div>
+        <g-button type="primary" size="mini"></g-button>
+      </div>
+      <div class="">
+        <z-table stripe />
+      </div>
     </div>
   </div>
 </template>
 <script>
 import BreadCrumb from "@/components/Breadcrumb/index";
 import { BarChart } from "@/components/Chart/index";
+import GButton from "./g-button.vue";
+import ZTable from "@/components/ZTable/index.vue";
 export default {
   components: {
     BreadCrumb,
-    BarChart
+    BarChart,
+    GButton,
+    ZTable
   },
   data() {
     return {
