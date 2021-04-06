@@ -13,9 +13,7 @@ export default {
       }
     }, 100);
     window.addEventListener("resize", this.__resizeHandler);
-    this.$_sidebarElm = document.getElementsByClassName(
-      "layout-default-aside"
-    )[0];
+    this.$_sidebarElm = document.getElementsByClassName("layout-aside")[0];
     this.$_sidebarElm &&
       this.$_sidebarElm.addEventListener(
         "transitionend",

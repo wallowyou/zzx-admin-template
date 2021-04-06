@@ -1,3 +1,32 @@
+/**
+ * @description: 判断数据类型
+ * @param {*} val
+ * @return {*}
+ */
+export const judgeType = val => {
+  return Object.prototype.toString.call(val).slice(8, -1);
+};
+
+/**
+ * @description: 节流函数，表示函数每隔一段时间执行一次
+ * @param {Function} func
+ * @param {number} delay
+ * @param {boolean} immediate 是否立即执行
+ * @return {*}
+ */
+export const throttle = (func, delay) => {
+  const context = this;
+  let previous = 0; // 上一次执行的时间默认为0
+  return function(...args) {
+    let now = +new Date();
+    // 将上一次时间和现在对比
+    if (now - previous > delay) {
+      previous = now;
+      func.apply(context, args);
+    }
+  };
+};
+
 /** 防抖函数
  * @param {Function} func
  * @param {number} wait
@@ -38,3 +67,42 @@ export function debounce(func, wait, immediate) {
     return result;
   };
 }
+export const parseTime = (time, fmt = "yyyy-MM-dd hh:mm:ss") => {
+  let date = null;
+  if (judgeType(time) === "Date") {
+    date = time;
+  } else if (judgeType(time) === "Number") {
+    date = new Date(time);
+  }
+  if (date) {
+    if (/(y+)/.test(fmt)) {
+      fmt = fmt.replace(
+        RegExp.$1,
+        (date.getFullYear() + "").substr(4 - RegExp.$1.length)
+      );
+    }
+    const o = {
+      "M+": date.getMonth() + 1,
+      "d+": date.getDate(),
+      "h+": date.getHours(),
+      "m+": date.getMinutes(),
+      "s+": date.getSeconds()
+    };
+    for (const k in o) {
+      if (new RegExp(`(${k})`).test(fmt)) {
+        const str = o[k] + "";
+        fmt = fmt.replace(
+          RegExp.$1,
+          RegExp.$1.length === 1 ? str : padLeftZero(str)
+        );
+      }
+    }
+    return fmt;
+  } else {
+    return "";
+  }
+};
+
+const padLeftZero = str => {
+  return ("00" + str).substr(str.length);
+};

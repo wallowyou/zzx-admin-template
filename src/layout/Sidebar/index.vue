@@ -131,6 +131,7 @@ export default {
   .el-menu {
     border-right: none;
   }
+
   // 菜单栏折叠样式隐藏标题和箭头
   .el-menu--collapse {
     .el-submenu {
@@ -149,6 +150,33 @@ export default {
     }
     .svg-icon {
       padding-right: 0;
+    }
+  }
+  // 导航栏激活状态样式
+  .el-menu-item.is-active.submenu-title-noDropdown {
+    color: $subMenuActiveText !important;
+    background: $menuActiveBg !important;
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+  }
+  li.is-active .submenu-title-noDropdown {
+    background: $menuHover !important;
+    border-radius: 5px;
+    margin: 0 5px;
+  }
+  .is-active > .el-submenu__title > span {
+    color: #fff;
+  }
+  .is-active > .el-submenu__title > svg {
+    color: #fff;
+  }
+  .is-active > .el-submenu__title > .el-icon-arrow-down {
+    color: #fff;
+  }
+  .nest-menu {
+    .el-menu-item.is-active {
+      color: $subMenuActiveText !important;
+      background: $menuActiveBg !important;
+      border-radius: 5px;
     }
   }
 }

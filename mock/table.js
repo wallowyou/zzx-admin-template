@@ -20,7 +20,7 @@ module.exports = [
     response: () => {
       const items = data.items;
       return {
-        code: 20000,
+        code: 200,
         data: {
           total: items.length,
           list: items
